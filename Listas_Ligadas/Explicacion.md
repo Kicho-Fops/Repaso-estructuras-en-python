@@ -80,7 +80,7 @@ class Persona:
 
     # Overloading the str() function to print object details
     def __str__(self):
-        return f"Nombre: {self.__nombre}, Edad: {self.__edad}"
+        return f"Nombre: {self.s}, Edad: {self.__edad}"
 
 
 persona = Persona("Juan", 30)
