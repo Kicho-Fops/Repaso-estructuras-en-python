@@ -1,5 +1,7 @@
 import Listas_Ligadas as ll
 
+
+
 from typing import TypeVar, Generic, Optional
 
 T = TypeVar('T')
@@ -53,3 +55,6 @@ def is_palindrome(word: str) -> bool: #No es la solucion optima
 
 # Example usage
 words = ["Racecar", "Python", "Madam", "Hello", "A man, a plan, a canal, Panama"]
+
+is_palindromes = [is_palindrome(word) for word in words]
+print(is_palindromes)  # Output: [True, False, True, False, True]
