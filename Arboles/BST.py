@@ -63,16 +63,16 @@ class BST(Generic[T]):
         nodo_anterior = None
         
         while(nodo_actal is not None):
-            if comparar_valor_nodos(data, nodo_actal) == 0: #Caso base
+            if self.comparar_valor_nodos(data, nodo_actal) == 0: #Caso base
                 return False #El valor ya existe en el arbol
             nodo_anterior = nodo_actal
-            nodo_actal = nodo_actal.get_nodo_derecha() if comparar_valor_nodos(data, nodo_actal) == 1 else nodo_actal.get_nodo_izquierda()
+            nodo_actal = nodo_actal.get_nodo_derecha() if self.comparar_valor_nodos(data, nodo_actal) == 1 else nodo_actal.get_nodo_izquierda()
             #Si llega aqui se inserta
         
         if nodo_anterior is None:
             self.nodoRaiz =  NodoArbol(data) #Caso base
         else:
-            if comparar_valor_nodos(data, nodo_anterior) == 1: #Caso derecha
+            if self.comparar_valor_nodos(data, nodo_anterior) == 1: #Caso derecha
                 nodo_anterior.set_nodo_derecha(NodoArbol(data))
             else:
                 nodo_anterior.set_nodo_izquierda(NodoArbol(data)) #Caso izquierda
