@@ -62,13 +62,14 @@ class BST(Generic[T]):
         nodo_actal = nodo
         nodo_anterior = None
         
+        #Primero comparar si el valor ya existe en el arbol
         while(nodo_actal is not None):
             if self.comparar_valor_nodos(data, nodo_actal) == 0: #Caso base
                 return False #El valor ya existe en el arbol
             nodo_anterior = nodo_actal
             nodo_actal = nodo_actal.get_nodo_derecha() if self.comparar_valor_nodos(data, nodo_actal) == 1 else nodo_actal.get_nodo_izquierda()
-            #Si llega aqui se inserta
-        
+            
+        #Si llega aqui se inserta
         if nodo_anterior is None:
             self.nodoRaiz =  NodoArbol(data) #Caso base
         else:
@@ -77,6 +78,40 @@ class BST(Generic[T]):
             else:
                 nodo_anterior.set_nodo_izquierda(NodoArbol(data)) #Caso izquierda
         return True
+    
+    def buscar(self, data: T) -> bool:
+        return self._buscar(data, self.nodoRaiz)
+    
+    def _buscar(self, data: T, nodo: NodoArbol) -> bool:
+        
+        while(nodo is not None):
+            if self.comparar_valor_nodos(data, nodo) == 0:
+                return True
+            nodo = nodo.get_nodo_derecha() if self.comparar_valor_nodos(data, nodo) == 1 else nodo.get_nodo_izquierda()
+        return False
+    
+    def printTree(self):
+        
+        self.InOrder(self.nodoRaiz)
+        
+    
+    
+    def InOrder(self, nodo: NodoArbol): #Necesitamos el nodo para saber cual es el nodo raiz
+        
+        #Suponemos que el nodo proporcionado es el nodo raiz
+        #Primero recorremos el arbol por la derecha y luego por la izquierda, haciendo asi que se impriman los datos en orden
+        
+        if nodo == None:
+            return
+        self.InOrder(nodo.get_nodo_derecha)
+        print(nodo.get_valor)
+        self.InOrder(nodo.get_nodo_izquierda)
+    
+    
+    #A partir de aqui son los metodos que de verdad me da miedo
+        
+
+    
     
     
                 
