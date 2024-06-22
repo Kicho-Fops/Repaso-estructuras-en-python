@@ -111,7 +111,17 @@ class BST(Generic[T]):
     #A partir de aqui son los metodos que de verdad me da miedo
         
 
+    #Para remover un valor, vamos a necesitar de 3 casos:
+    # 1. Caso de nodo hoja
+    # 2. Caso de nodo con un hijo
+    # 3. Caso de nodo con 2 hijos
     
+    def removerValor(self, data: T) -> bool:
+        
+        nodoActual = self.nodoRaiz
+        
+            #IK
+        if self.comparar_valor_nodos(data, nodoActual.get_valor) == 0:
     
     
                 
