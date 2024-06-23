@@ -12,6 +12,7 @@ class NodoArbol(Generic[T]):
         self.derecha = nodoDerecha
         self.izquierda = nodoIzquierda
         
+        
     def get_nodo_derecha(self) -> Optional['NodoArbol']:
         return self.derecha
     
@@ -40,7 +41,6 @@ class BST(Generic[T]):
     
     def __init__(self):
         self.nodoRaiz = NodoArbol
-        self.nodoVisitado = None
         self.fila = None
     
     def insertar(self, data: T) -> None:
@@ -116,10 +116,10 @@ class BST(Generic[T]):
     # 2. Caso de nodo con un hijo
     # 3. Caso de nodo con 2 hijos
     
-    def removerValor(self, data: T) -> bool:
+    def removerValor(self, data: NodoArbol) -> bool:
         
         nodoActual = self.nodoRaiz
-        nodoAnterior = None
+        nodoAnterior = NodoArbol #Esto antes era None
         while nodoActual is not None:
         
             #Encontramos el valor que buscamos
@@ -237,8 +237,57 @@ class BST(Generic[T]):
                 nodoActual = nodoActual.get_nodo_derecha()
         
             return False
-                    
-                    
+    
+    def contar(self) -> int:
+        return self._contar(self.nodoRaiz)
+    
+    def _contar(self, Raiz: NodoArbol) -> int:
+        
+        if Raiz == None:
+            return 0
+        
+        x = self._contar(Raiz.get_nodo_izquierda)
+        y = self._contar(Raiz.get_nodo_derecha)
+        return (x+y+1) #Le ponemos +1 para contar el nodo raiz
+    
+    def BFS(self):
+        self._BFS(self.nodoRaiz)
+        
+    def _BFS(self, Raiz: NodoArbol):    
+        
+        from collections import deque # Esto va a ser codigo tomado de https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
+        
+        
+        #
+        #   INVESTIGAR COMO SIRVE EL BFS
+        #   TAMBIEN PARA QUE SIRVE EL QUEUE
+        #
+        #
+        #
+        #
+        
+        nodosMarcados = []
+        fila = deque()
+        
+        nodosMarcados[Raiz.get_valor()] = True
+        print("El valor del nodo es: " + Raiz.get_valor())
+        fila.append(Raiz)
+    
+        while fila:
+            nodoActual = fila.popleft()
+            
+            #Obtenemos todos los nodos adyacentes al arbol
+            izquierda = nodoActual.get_nodo_izquierda
+            if nodoActual.get_nodo_izquierda == None and izquierda.get_valor() not in nodosMarcados:
+                nodosMarcados[izquierda.get_valor()] = True
+                fila.append(izquierda)
+              
+            derecha = nodoActual.get_nodo_derecha()  
+            if derecha is not None and derecha.get_valor() not in nodosMarcados:
+                nodosMarcados.add(derecha.get_valor())
+                print("El valor del nodo es: " + str(derecha.get_valor()))
+                fila.append(derecha)     
+
                     
                  
                     
